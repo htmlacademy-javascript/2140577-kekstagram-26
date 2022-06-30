@@ -57,6 +57,5 @@ const getPhotoDescription =()=>
     message: getRandomArrayElement (MESSAGE),
     name: getRandomArrayElement (NAMES)
   });
-
 const similarPhotoDescription = Array.from({length: 25}, getPhotoDescription);
 console.log (similarPhotoDescription);

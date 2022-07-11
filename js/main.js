@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 function getRandomIntInclusive(min, max) {
   const minNumber = Math.ceil(min);
   const maxNumber = Math.floor(max);
@@ -16,3 +17,12 @@ function checkCommentLength (commentLength, maxLength) {
     console.log ('ok');}
 }
 checkCommentLength ();
+=======
+<<<<<<< HEAD
+import './photo.js';
+import { similarPhotoDescription } from './data.js';
+console.log (similarPhotoDescription);
+=======
+
+>>>>>>> 1ff61dc2c3c9011aad2ab3ea80b70f7b59989f97
+>>>>>>> Stashed changes

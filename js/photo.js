@@ -14,4 +14,4 @@ miniPhotos.forEach(({url, comments, like}) =>{
   similarPhotosFragment.append(imgTemplate);
 });
 template.append(similarPhotosFragment);
-console.log(template);
+

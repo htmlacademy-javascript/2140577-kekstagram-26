@@ -6,14 +6,6 @@ function getRandomIntInclusive(min, max) {
 function getRandomArrayElement (arr) {
   return arr[getRandomIntInclusive (0, arr.length-1)];
 }
-
-function checkCommentLength (commentLength, maxLength) {
-  if (commentLength > maxLength) {
-    return false;
-  } else  {
-    return true;
-  }
-}
 function getIdList (number) {
   return Array (number)
     .fill (0)

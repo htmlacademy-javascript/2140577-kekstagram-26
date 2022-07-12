@@ -13,5 +13,5 @@ miniPhotos.forEach(({url, comments, like}) =>{
   imgTemplate.querySelector('.picture__likes').textContent = like;
   similarPhotosFragment.append(imgTemplate);
 });
-template.append(similarPhotosFragment);
+template.after(similarPhotosFragment);
 

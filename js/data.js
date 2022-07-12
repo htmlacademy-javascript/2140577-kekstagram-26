@@ -48,6 +48,4 @@ const getPhotoDescription = () => ({
   like: getRandomArrayElement(likes),
 });
 const similarPhotoDescription = () => Array.from({length: 25}, getPhotoDescription);
-
-
 export {similarPhotoDescription};

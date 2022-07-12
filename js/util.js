@@ -6,6 +6,7 @@ function getRandomIntInclusive(min, max) {
 function getRandomArrayElement (arr) {
   return arr[getRandomIntInclusive (0, arr.length-1)];
 }
+
 function getIdList (number) {
   return Array (number)
     .fill (0)

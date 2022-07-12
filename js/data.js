@@ -1,3 +1,4 @@
+
 import {getRandomArrayElement} from './util.js';
 import {getIdList} from './util.js';
 import { getRandomIntInclusive } from './util.js';
@@ -36,6 +37,7 @@ const NAMES = [
   'Антон',
   'Мэри'
 ];
+
 const getPhotoDescription = () => ({
   id: getRandomArrayElement(id),
   avatar: getRandomArrayElement(avatar),
@@ -46,4 +48,6 @@ const getPhotoDescription = () => ({
   like: getRandomArrayElement(likes),
 });
 const similarPhotoDescription = () => Array.from({length: 25}, getPhotoDescription);
+
+
 export {similarPhotoDescription};

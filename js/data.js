@@ -1,4 +1,21 @@
 
+import {getRandomArrayElement} from './util.js';
+import {getIdList} from './util.js';
+import { getRandomIntInclusive } from './util.js';
+
+const id = getIdList(25);
+const url = Array.from({length:25}, () => `photos/${getRandomIntInclusive(1, 25)}.jpg`);
+const avatar = Array.from({length:6}, () => `img/avatar-${getRandomIntInclusive(1, 6)}.svg`);
+
+const COMMENTS = [
+  'Просто замечательно',
+  'надо убирать палец из кадра',
+  'Все на фотке перекошено',
+  'Я уронил фотоаппарат',
+  'Wow',
+  'Adorable',
+  'Super'
+];
 const likes = getIdList (200);
 const MESSAGE = [
   'Всё отлично!',
@@ -21,4 +38,14 @@ const NAMES = [
   'Мэри'
 ];
 
+const getPhotoDescription = () => ({
+  id: getRandomArrayElement(id),
+  avatar: getRandomArrayElement(avatar),
+  message:getRandomArrayElement(MESSAGE),
+  name: getRandomArrayElement(NAMES),
+  url: getRandomArrayElement(url),
+  comments: getRandomArrayElement(COMMENTS),
+  like: getRandomArrayElement(likes),
+});
+const similarPhotoDescription = () => Array.from({length: 25}, getPhotoDescription);
 export {similarPhotoDescription};

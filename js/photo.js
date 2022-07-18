@@ -1,5 +1,6 @@
 import {similarPhotoDescription} from './data.js';
-
+import { openPhoto,closePhoto,closePreviewPhoto } from './fullPhoto.js';
+import { isEnterKey } from './util.js';
 const template=document.querySelector('#picture')
   .content
   .querySelector('.picture');
@@ -14,3 +15,21 @@ miniPhotos.forEach(({url, comments, like}) =>{
   similarPhotosFragment.append(imgTemplate);
 });
 template.after(similarPhotosFragment);
+
+template.addEventListener('click', ()=> {
+  openPhoto();
+});
+template.addEventListener('keydown', (evt) => {
+  if(isEnterKey(evt)){
+    openPhoto();
+  }
+});
+
+closePreviewPhoto.addEventListener('click',() =>{
+  closePhoto();
+});
+closePreviewPhoto.addEventListener('keydown', (evt)=>{
+  if(isEnterKey(evt)){
+    closePhoto();
+  }
+});

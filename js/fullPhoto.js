@@ -4,6 +4,7 @@ import { isEscapeKey } from './util.js';
 const fullPhoto = similarPhotoDescription();
 
 const body = document.querySelector('body');
+const picturesContainer = document.querySelector('.pictures  container');
 const bigPicture = document.querySelector('.big-picture');
 const socialCommentsLoader = document.querySelector('.social__comments-loader');
 const previewPhoto = bigPicture.querySelector('.big-picture__img');
@@ -15,16 +16,19 @@ const closePreviewPhoto = bigPicture.querySelector('#picture-cancel');
 
 const generatePhotoList = () => {
   const similarPhotosFragment = document.createDocumentFragment();
+
   fullPhoto.forEach(({url})=>{
     const picTemplate=previewPhoto.cloneNode(true);
     picTemplate.querySelector('img').setAttribute('src', url);
     similarPhotosFragment.append(picTemplate);
   });
+
   fullPhoto.forEach(({like})=>{
     const likeTemplate=photoLike.cloneNode(true);
     likeTemplate.textContent=like;
     similarPhotosFragment.append(likeTemplate);
   });
+
   fullPhoto.forEach(({comments})=>{
     const commentTemplate=socialCommentCount.cloneNode(true);
     commentTemplate.querySelector('.comments-count').textContent=comments;
@@ -44,18 +48,21 @@ const generatePhotoList = () => {
     captionTemp.querySelector('.social__caption').textContent=descriptions;
     similarPhotosFragment.append(captionTemp);
   });
-  bigPicture.after(similarPhotosFragment);
+
+  picturesContainer.append(similarPhotosFragment);
 };
 
 const clearPhotoList = ()=>{
   bigPicture.innerHTML='';
 };
+
 const onEscKeydown =  (evt) =>{
   if(isEscapeKey(evt)){
     evt.preventDefault();
     bigPicture.classList.add('hidden');
   }
 };
+
 function openPhoto (){
   bigPicture.classList.remove('hidden');
   socialCommentCount.classList.add('hidden');
@@ -65,6 +72,7 @@ function openPhoto (){
 
   document.addEventListener('keydown', onEscKeydown);
 }
+
 function closePhoto () {
   bigPicture.classList.add('hidden');
   socialCommentCount.classList.remove('hidden');
@@ -75,4 +83,4 @@ function closePhoto () {
   document.removeEventListener('keydown', onEscKeydown);
 }
 
-export { openPhoto,closePhoto, closePreviewPhoto};
+export { openPhoto,closePhoto, closePreviewPhoto, previewPhoto, bigPicture, picturesContainer };

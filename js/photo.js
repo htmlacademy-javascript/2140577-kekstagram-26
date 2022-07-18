@@ -1,12 +1,13 @@
 import {similarPhotoDescription} from './data.js';
-import { openPhoto,closePhoto,closePreviewPhoto } from './fullPhoto.js';
+import { openPhoto,closePhoto,closePreviewPhoto, picturesContainer } from './fullPhoto.js';
 import { isEnterKey } from './util.js';
+
 const template=document.querySelector('#picture')
   .content
   .querySelector('.picture');
-
 const miniPhotos = similarPhotoDescription();
 const similarPhotosFragment = document.createDocumentFragment();
+
 miniPhotos.forEach(({url, comments, like}) =>{
   const imgTemplate = template.cloneNode(true);
   imgTemplate.querySelector('.picture__img').setAttribute('src', url);
@@ -14,12 +15,14 @@ miniPhotos.forEach(({url, comments, like}) =>{
   imgTemplate.querySelector('.picture__likes').textContent = like;
   similarPhotosFragment.append(imgTemplate);
 });
-template.after(similarPhotosFragment);
 
-template.addEventListener('click', ()=> {
+template.append(similarPhotosFragment);
+
+picturesContainer.addEventListener('click', ()=> {
   openPhoto();
 });
-template.addEventListener('keydown', (evt) => {
+
+picturesContainer.addEventListener('keydown', (evt) => {
   if(isEnterKey(evt)){
     openPhoto();
   }
@@ -28,6 +31,7 @@ template.addEventListener('keydown', (evt) => {
 closePreviewPhoto.addEventListener('click',() =>{
   closePhoto();
 });
+
 closePreviewPhoto.addEventListener('keydown', (evt)=>{
   if(isEnterKey(evt)){
     closePhoto();

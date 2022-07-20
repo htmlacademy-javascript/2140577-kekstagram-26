@@ -1,53 +1,23 @@
-import { similarPhotoDescription } from './data.js';
-import { isEscapeKey } from './util.js';
-
-const fullPhoto = similarPhotoDescription();
+import { isEscapeKey, isEnterKey } from './util.js';
 
 const body = document.querySelector('body');
-const picturesContainer = document.querySelector('.pictures  container');
+const picturesContainer = document.querySelector('.pictures');
 const bigPicture = document.querySelector('.big-picture');
 const socialCommentsLoader = document.querySelector('.social__comments-loader');
 const previewPhoto = bigPicture.querySelector('.big-picture__img');
+const previewPhotoSee= previewPhoto.querySelector('img');
 const photoLike = bigPicture.querySelector('.likes-count');
 const socialCommentCount = bigPicture.querySelector('.social__comment-count');
-const socialComment = bigPicture.querySelector('.social__comments');
-const caption = bigPicture.querySelector('.social__header');
+const socialComment = bigPicture.querySelectorAll('.social__comments');
 const closePreviewPhoto = bigPicture.querySelector('#picture-cancel');
 
-const generatePhotoList = () => {
+const generatePhotoList = ({url,like,comments}) => {
   const similarPhotosFragment = document.createDocumentFragment();
 
-  fullPhoto.forEach(({url})=>{
-    const picTemplate=previewPhoto.cloneNode(true);
-    picTemplate.querySelector('img').setAttribute('src', url);
-    similarPhotosFragment.append(picTemplate);
-  });
-
-  fullPhoto.forEach(({like})=>{
-    const likeTemplate=photoLike.cloneNode(true);
-    likeTemplate.textContent=like;
-    similarPhotosFragment.append(likeTemplate);
-  });
-
-  fullPhoto.forEach(({comments})=>{
-    const commentTemplate=socialCommentCount.cloneNode(true);
-    commentTemplate.querySelector('.comments-count').textContent=comments;
-    similarPhotosFragment.append(commentTemplate);
-  });
-
-  fullPhoto.forEach(({avatar, name, comments})=>{
-    const socialCommentTemp=socialComment.cloneNode(true);
-    socialCommentTemp.querySelector('.social__picture').setAttribute('src', avatar);
-    socialCommentTemp.querySelector('.social__picture').setAttribute('alt', name);
-    socialCommentTemp.querySelector('.social__text').textContent=comments;
-    similarPhotosFragment.append(socialCommentTemp);
-  });
-
-  fullPhoto.forEach(({descriptions})=>{
-    const captionTemp=caption.cloneNode(true);
-    captionTemp.querySelector('.social__caption').textContent=descriptions;
-    similarPhotosFragment.append(captionTemp);
-  });
+  previewPhotoSee.setAttribute('src', url);
+  photoLike.textContent=like;
+  socialComment.textContent=comments;
+  similarPhotosFragment.append(previewPhotoSee,photoLike,socialComment);
 
   picturesContainer.append(similarPhotosFragment);
 };
@@ -63,15 +33,15 @@ const onEscKeydown =  (evt) =>{
   }
 };
 
-function openPhoto (){
+const openPhoto = (photo)=> {
   bigPicture.classList.remove('hidden');
   socialCommentCount.classList.add('hidden');
   socialCommentsLoader.classList.add('hidden');
   body.classList.add('modal-open');
-  generatePhotoList();
+  generatePhotoList(photo);
 
   document.addEventListener('keydown', onEscKeydown);
-}
+};
 
 function closePhoto () {
   bigPicture.classList.add('hidden');
@@ -83,4 +53,14 @@ function closePhoto () {
   document.removeEventListener('keydown', onEscKeydown);
 }
 
-export { openPhoto,closePhoto, closePreviewPhoto, previewPhoto, bigPicture, picturesContainer };
+closePreviewPhoto.addEventListener('click',() =>{
+  closePhoto();
+});
+
+closePreviewPhoto.addEventListener('keydown', (evt)=>{
+  if(isEnterKey(evt)){
+    closePhoto();
+  }
+});
+
+export { openPhoto, picturesContainer };

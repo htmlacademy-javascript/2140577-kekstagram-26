@@ -15,4 +15,5 @@ function getIdList (number) {
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
 const isEnterKey = (evt) => evt.key === 'Enter';
+
 export {getRandomIntInclusive, getRandomArrayElement, getIdList, isEscapeKey, isEnterKey};

@@ -20,7 +20,7 @@ const generatePhotoList = ({url, like, comments, descriptions, avatar, name}) =>
   photoLike.textContent = like;
   socialCaption.textContent = descriptions;
   commentCount.textContent = comments.length;
-  if(comments, avatar, name) {
+  if(comments) {
     const commentTemplate = document.querySelector('#comment').content.cloneNode(true);
     const commentText = commentTemplate.querySelector('.social__text');
     commentText.textContent = comments;

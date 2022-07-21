@@ -2,7 +2,7 @@ import {similarPhotoDescription} from './data.js';
 import { openPhoto,picturesContainer } from './fullPhoto.js';
 import { isEnterKey } from './util.js';
 
-const template=document.querySelector('#picture')
+const template = document.querySelector('#picture')
   .content
   .querySelector('.picture');
 const miniPhotos = similarPhotoDescription();
@@ -15,11 +15,11 @@ miniPhotos.forEach((photo) => {
   imgTemplate.querySelector('.picture__likes').textContent = photo.like;
   similarPhotosFragment.append(imgTemplate);
 
-  picturesContainer.addEventListener('click', ()=>
+  imgTemplate.addEventListener('click', ()=>
     openPhoto(photo)
   );
 
-  picturesContainer.addEventListener('keydown', () => {
+  imgTemplate.addEventListener('keydown', () => {
     if (isEnterKey()){
       openPhoto(photo);
     }

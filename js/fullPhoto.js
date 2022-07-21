@@ -8,22 +8,27 @@ const previewPhoto = bigPicture.querySelector('.big-picture__img');
 const previewPhotoSee= previewPhoto.querySelector('img');
 const photoLike = bigPicture.querySelector('.likes-count');
 const socialCommentCount = bigPicture.querySelector('.social__comment-count');
-const socialComment = bigPicture.querySelectorAll('.social__comments');
+const commentCount = socialCommentCount.querySelector('.comments-count');
+const socialComment = bigPicture.querySelector('.social__comments');
 const closePreviewPhoto = bigPicture.querySelector('#picture-cancel');
+const socialCaption = bigPicture.querySelector('.social__caption');
 
-const generatePhotoList = ({url,like,comments}) => {
-  const similarPhotosFragment = document.createDocumentFragment();
+
+const generatePhotoList = ({url, like, comments, descriptions, avatar, name}) => {
 
   previewPhotoSee.setAttribute('src', url);
-  photoLike.textContent=like;
-  socialComment.textContent=comments;
-  similarPhotosFragment.append(previewPhotoSee,photoLike,socialComment);
-
-  picturesContainer.append(similarPhotosFragment);
-};
-
-const clearPhotoList = ()=>{
-  bigPicture.innerHTML='';
+  photoLike.textContent = like;
+  socialCaption.textContent = descriptions;
+  commentCount.textContent = comments.length;
+  if(comments, avatar, name) {
+    const commentTemplate = document.querySelector('#comment').content.cloneNode(true);
+    const commentText = commentTemplate.querySelector('.social__text');
+    commentText.textContent = comments;
+    const commenator = commentTemplate.querySelector('img');
+    commenator.setAttribute('src', avatar);
+    commenator.setAttribute('alt', name);
+    socialComment.append(commentTemplate);
+  }
 };
 
 const onEscKeydown =  (evt) =>{
@@ -48,7 +53,7 @@ function closePhoto () {
   socialCommentCount.classList.remove('hidden');
   socialCommentsLoader.classList.remove('hidden');
   body.classList.remove('modal-open');
-  clearPhotoList();
+  socialComment.innerHTML = '';
 
   document.removeEventListener('keydown', onEscKeydown);
 }
@@ -63,4 +68,4 @@ closePreviewPhoto.addEventListener('keydown', (evt)=>{
   }
 });
 
-export { openPhoto, picturesContainer };
+export { openPhoto,closePhoto, picturesContainer };

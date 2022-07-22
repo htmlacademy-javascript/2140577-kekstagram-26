@@ -25,7 +25,13 @@ const MESSAGE = [
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
-
+const DESCRIPTIONS = [
+  'В целом всё ок',
+  'надо убирать палец из кадра',
+  'это просто непрофессионально',
+  'на банановой кожуре',
+  'их избивают?'
+];
 const NAMES = [
   'Иван',
   'Анна',
@@ -46,6 +52,7 @@ const getPhotoDescription = () => ({
   url: getRandomArrayElement(url),
   comments: getRandomArrayElement(COMMENTS),
   like: getRandomArrayElement(likes),
+  descriptions: getRandomArrayElement(DESCRIPTIONS)
 });
 const similarPhotoDescription = () => Array.from({length: 25}, getPhotoDescription);
 export {similarPhotoDescription};
